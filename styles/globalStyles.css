@@ -77,12 +77,6 @@ ul {
   line-height: 150%;
 }
 
-.container {
-  max-width: 1150px;
-  margin: 0 auto;
-}
-
-
 nav{
   position: relative;
   /* border: 1px solid red; */
@@ -122,4 +116,10 @@ footer{
   align-items: center;
   /* justify-content: space-between; */
   gap: 54px;
+}
+
+.container {
+  max-width: 1150px;
+  margin: 0 auto;
+  
 }
