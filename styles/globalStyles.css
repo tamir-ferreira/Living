@@ -84,6 +84,7 @@ nav{
 
 .navigation {
   display: flex;
+  /* flex-wrap: wrap; */
   width: 100%;
   gap: 20px;
   /* border: 1px solid red; */

@@ -70,6 +70,6 @@ header>img {
 }
 
 .observer{
-    background-color: red;
-    height: 50px;
+    /* background-color: red; */
+    height: 5px;
 }
