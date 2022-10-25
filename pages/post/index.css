@@ -1,1 +1,38 @@
-/* Desenvolva seu estilo aqui */
+header{
+    display: flex;
+    justify-content: space-between;
+    padding: 30px 0;
+    align-items: center;
+}
+.post-header{
+    /* display: flex; */
+    /* border: 1px solid green; */
+    padding: 80px;
+    background-color: var(--color-grey-700);
+    /* margin-bottom: 53px; */
+}
+
+.post-header div{
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+}
+
+.post-header p{
+    color: var(--color-grey-200);
+}
+
+.post-content{
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 72px;
+    /* border: 1px solid green; */
+}
+
+.post-content img{
+    margin: 52px 0;
+}
+
+.post-content p{
+    color: var(--color-grey-200);
+}
