@@ -1,12 +1,16 @@
 /* ------------------ SCRIPT HOME ------------------- */
 import { getNews } from "../../scripts/requests.js"
+
+const categories = []
+
 let page = 0
 
 
 const observer = new IntersectionObserver(async (entries) => {
     if (entries.some((entry) => entry.isIntersecting)) {
         // getNews(page++);
-        renderPosts(await getNews(page++), false);
+
+        if (page < 3) renderPosts(await getNews(page++), false);
 
     }
 });
@@ -26,6 +30,62 @@ const mapBtnsRead = () => {
 
     observer.observe(divObserver);
 }
+
+
+
+const mapBtnsCategory = () => {
+    const btnsNavigation = document.querySelectorAll('[data-btns]')
+    localStorage.setItem('@living-category', 'Todos')
+
+    btnsNavigation.forEach(btn => {
+        btn.onclick = () => {
+            const category = btn.getAttribute('data-btns')
+            console.log(category)
+            btnsNavigation.forEach(clear => clear.classList.remove('btn-grey-focus'))
+            btn.classList.add('btn-grey-focus')
+            localStorage.setItem('@living-category', category)
+        }
+    });
+}
+
+
+
+
+const renderBtnsCategory = (posts) => {
+    const navigation = document.querySelector('.navigation')
+
+    // console.log(btnsNavigation)
+
+    /*  btnsNavigation.forEach(btn => {
+         if (btn.getAttribute('data-btns') =) {
+             
+         }
+     }) */
+
+    posts.forEach(post => {
+        const { category } = post
+        /* const find = btnsNavigation.findIndex(btn => btn.getAttribute('data-btns').trim() == category.trim())
+        console.log(category, find) */
+
+        const findCategory = categories.findIndex(elem => elem == category)
+
+        if (findCategory === -1) {
+            const li = document.createElement('li')
+            const button = document.createElement('button')
+
+            button.className = 'btn-grey'
+            button.textContent = category
+            button.dataset.btns = category
+
+            li.appendChild(button)
+            navigation.appendChild(li)
+
+            categories.push(category)
+        }
+    })
+    mapBtnsCategory()
+}
+
 
 
 const renderPosts = (posts, clearList = true) => {
@@ -60,6 +120,7 @@ const renderPosts = (posts, clearList = true) => {
         div.append(h3, p, span)
     });
 
+    renderBtnsCategory(posts)
     mapBtnsRead()
 }
 renderPosts(await getNews(page++));
