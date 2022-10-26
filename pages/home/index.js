@@ -1,6 +1,7 @@
 /* ------------------ SCRIPT HOME ------------------- */
 import { getNews } from "../../scripts/requests.js"
 
+const storagedCategory = localStorage.getItem('@living-category')
 const categories = []
 let page = 0
 
@@ -33,7 +34,6 @@ const mapBtnsRead = () => {
 }
 
 const reloadRender = (posts) => {
-    const storagedCategory = localStorage.getItem('@living-category')
     const btnsNavigation = document.querySelectorAll('[data-btns]')
 
     if (storagedCategory == null) {
@@ -162,7 +162,15 @@ const renderPosts = (posts, clearList = true) => {
 }
 console.log('reload')
 
-renderPosts(await getNews(page++));
+const initialPosts = async () => {
+    if (storagedCategory == null) {
+        localStorage.setItem('@living-category', 'Todos')
+        if (storagedCategory == "Todos") {
+            renderPosts(await getNews(page++));
+        }
+    }
+}
+
 
 const eventgetAll = async () => {
     const posts = []
@@ -179,5 +187,6 @@ const eventgetAll = async () => {
     // console.log(posts)
 
     renderBtnsCategory(posts)
+    initialPosts(posts)
 }
 eventgetAll()
