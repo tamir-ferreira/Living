@@ -31,6 +31,8 @@ header{
 
 .post-content img{
     margin: 52px 0;
+    height: 402px;
+    object-fit: cover;
 }
 
 .post-content p{

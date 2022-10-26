@@ -16,8 +16,7 @@ button:hover{
     border: 1px solid var(--color-grey-700);
 }
 
-.btn-grey:hover,
-.btn-grey-focus {
+.btn-grey:hover{
     background: var(--color-grey-600);
     border: 1px solid var(--color-grey-600);
 }
@@ -29,11 +28,12 @@ button:hover{
 }
 
 .btn-grey-dark:hover {
+    color: var(--color-grey-800);
     background: var(--color-grey-300);
     border: 1px solid var(--color-grey-300);
 }
 
-.btn-primary {
+.btn-primary{
     color: var(--color-grey-800);
     background: var(--color-brand-100);
     border: 1px solid var(--color-brand-100);
@@ -45,7 +45,7 @@ button:hover{
 }
 
 .bg-icon{
-    background-color: white;
+    color: var(--color-grey-800);
     border-radius: var(--radius-2);
     position: absolute;
     right: 0;
