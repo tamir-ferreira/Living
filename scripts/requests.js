@@ -19,3 +19,21 @@ export const getNews = async(currentPage) =>{
         console.error(error)
     }
 }
+
+
+export const getPostId = async(id) =>{
+    try {
+        const request = await fetch(`${baseUrl}/${id}`)
+        if (request.ok) {
+            const response = await request.json()
+            // console.log(response)
+            return response
+        } else {
+            console.error(request)
+        }
+
+    } catch (error) {
+        console.error(error)
+    }
+}
+

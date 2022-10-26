@@ -2,19 +2,19 @@
 import { getNews } from "../../scripts/requests.js"
 
 const categories = []
-
 let page = 0
 
 
+// const activeObserver = () =>{
 const observer = new IntersectionObserver(async (entries) => {
     if (entries.some((entry) => entry.isIntersecting)) {
         // getNews(page++);
-
-        if (page < 3) renderPosts(await getNews(page++), false);
-
+        const category = localStorage.getItem('@living-category')
+        if (page < 3 && category == 'Todos') renderPosts(await getNews(page++), false);
     }
 });
-
+// }
+// activeObserver()
 
 
 const mapBtnsRead = () => {
@@ -25,6 +25,7 @@ const mapBtnsRead = () => {
             const id = btn.getAttribute('data-id')
             // console.log()
             localStorage.setItem('@living-postID', id)
+            window.location.replace("../post/index.html");
         }
     })
 
@@ -33,17 +34,31 @@ const mapBtnsRead = () => {
 
 
 
-const mapBtnsCategory = () => {
+const mapBtnsCategory = (posts) => {
     const btnsNavigation = document.querySelectorAll('[data-btns]')
     localStorage.setItem('@living-category', 'Todos')
 
     btnsNavigation.forEach(btn => {
-        btn.onclick = () => {
+        btn.onclick = async () => {
             const category = btn.getAttribute('data-btns')
             console.log(category)
-            btnsNavigation.forEach(clear => clear.classList.remove('btn-grey-focus'))
-            btn.classList.add('btn-grey-focus')
+            btnsNavigation.forEach(clear => {
+                clear.classList.remove('btn-primary')
+                clear.classList.add('btn-grey')
+            })
+            btn.classList.remove('btn-grey')
+            btn.classList.add('btn-primary')
             localStorage.setItem('@living-category', category)
+
+            if (category == 'Todos') {
+                page = 0
+                console.log(renderPosts(await getNews(page++)))
+
+            } else {
+                const filteredPosts = posts.filter(post => post.category == category)
+                console.log(filteredPosts)
+                renderPosts(filteredPosts, true)
+            }
         }
     });
 }
@@ -53,14 +68,6 @@ const mapBtnsCategory = () => {
 
 const renderBtnsCategory = (posts) => {
     const navigation = document.querySelector('.navigation')
-
-    // console.log(btnsNavigation)
-
-    /*  btnsNavigation.forEach(btn => {
-         if (btn.getAttribute('data-btns') =) {
-             
-         }
-     }) */
 
     posts.forEach(post => {
         const { category } = post
@@ -83,7 +90,7 @@ const renderBtnsCategory = (posts) => {
             categories.push(category)
         }
     })
-    mapBtnsCategory()
+    mapBtnsCategory(posts)
 }
 
 
@@ -120,8 +127,24 @@ const renderPosts = (posts, clearList = true) => {
         div.append(h3, p, span)
     });
 
-    renderBtnsCategory(posts)
+    // renderBtnsCategory(posts)
     mapBtnsRead()
 }
 renderPosts(await getNews(page++));
 
+const eventgetAll = async () => {
+    const posts = []
+    let currentPage = 0
+
+    while (currentPage < 3) {
+        const list = await getNews(currentPage)
+        // console.log(list)
+        list.forEach(post => {
+            posts.push(post)
+        })
+        currentPage++
+    }
+    // console.log(posts)
+    renderBtnsCategory(posts)
+}
+eventgetAll()
