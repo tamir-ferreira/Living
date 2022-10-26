@@ -9,7 +9,7 @@ export const getNews = async(currentPage) =>{
         if (request.ok) {
 
             const response = await request.json()
-            console.log(response)
+            // console.log(response)
             return response.news
         } else {
             console.error(request)

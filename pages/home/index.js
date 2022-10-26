@@ -32,16 +32,45 @@ const mapBtnsRead = () => {
     observer.observe(divObserver);
 }
 
+const reloadRender = (posts) => {
+    const storagedCategory = localStorage.getItem('@living-category')
+    const btnsNavigation = document.querySelectorAll('[data-btns]')
+
+    if (storagedCategory == null) {
+        localStorage.setItem('@living-category', 'Todos')
+    } else {
+        btnsNavigation.forEach(btn => {
+            const category = btn.getAttribute('data-btns')
+            // console.log(category)
+
+            btn.classList.remove('btn-primary')
+            btn.classList.add('btn-grey')
+
+            if (category == storagedCategory) {
+                console.log('encontrada', category)
+                btn.classList.remove('btn-grey')
+                btn.classList.add('btn-primary')
+
+                const filteredPosts = posts.filter(post => post.category == category)
+                // console.log(filteredPosts)
+                renderPosts(filteredPosts, true)
+            }
+        })
+    }
+}
+
 
 
 const mapBtnsCategory = (posts) => {
     const btnsNavigation = document.querySelectorAll('[data-btns]')
-    localStorage.setItem('@living-category', 'Todos')
+    // localStorage.setItem('@living-category', 'Todos')
+
+    // console.log(localStorage.getItem('@living-category'))
 
     btnsNavigation.forEach(btn => {
         btn.onclick = async () => {
             const category = btn.getAttribute('data-btns')
-            console.log(category)
+            // console.log(category)
             btnsNavigation.forEach(clear => {
                 clear.classList.remove('btn-primary')
                 clear.classList.add('btn-grey')
@@ -52,7 +81,7 @@ const mapBtnsCategory = (posts) => {
 
             if (category == 'Todos') {
                 page = 0
-                console.log(renderPosts(await getNews(page++)))
+                renderPosts(await getNews(page++))
 
             } else {
                 const filteredPosts = posts.filter(post => post.category == category)
@@ -61,6 +90,7 @@ const mapBtnsCategory = (posts) => {
             }
         }
     });
+    reloadRender(posts)
 }
 
 
@@ -89,11 +119,11 @@ const renderBtnsCategory = (posts) => {
 
             categories.push(category)
         }
+        // console.log(categories)
+        localStorage.setItem('@living-categories', JSON.stringify(categories))
     })
     mapBtnsCategory(posts)
 }
-
-
 
 const renderPosts = (posts, clearList = true) => {
     const listPosts = document.querySelector('.posts')
@@ -130,6 +160,8 @@ const renderPosts = (posts, clearList = true) => {
     // renderBtnsCategory(posts)
     mapBtnsRead()
 }
+console.log('reload')
+
 renderPosts(await getNews(page++));
 
 const eventgetAll = async () => {
@@ -145,6 +177,7 @@ const eventgetAll = async () => {
         currentPage++
     }
     // console.log(posts)
+
     renderBtnsCategory(posts)
 }
 eventgetAll()
