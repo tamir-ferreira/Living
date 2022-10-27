@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="../../styles/button.css">
     <link rel="stylesheet" href="index.css">
     <script defer type="module" src='index.js'></script>
-    <title>Living</title>
+    <title>Living - HOME</title>
 </head>
 
 <body>
@@ -19,12 +19,14 @@
             <div class="header-content">
                 <h2 class="font1">Cuidando de cada <span>detalhe</span> da sua casa</h2>
                 <p class="font4-rg">Trazendo uma nova e incrível experiência para você e para seu lar</p>
-                <span class="font4-sb">Consumir conteúdos</span>
+                <a href="#content">
+                    <span class="font4-sb">Consumir conteúdos</span>
+                </a>
             </div>
         </div>
         <img src="../../imgs/img-header.png" alt="mulher utilizando um laptop">
     </header>
-    <main class="container">
+    <main id="content" class="container">
         <nav class="container">
             <ul class="navigation">
                 <li>
@@ -32,8 +34,11 @@
                 </li>
                 <!-- RENDERIZADO PELO JS -->
             </ul>
-            <div class="bg-icon">
-                <button class="icon"></button>
+            <div class="bg-icon-right">
+                <button id="btn-scroll-right" class="icon-right"></button>
+            </div>
+            <div class="bg-icon-left">
+                <button id="btn-scroll-left" class="icon-left"></button>
             </div>
         </nav>
         <section>

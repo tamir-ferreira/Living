@@ -1,3 +1,4 @@
+/* ---------------- CSS HOME ------------------- */
 header {
     display: flex;
     justify-content: space-between;
@@ -11,7 +12,6 @@ header>img {
 .header-container {
     display: flex;
     flex-direction: column;
-    /* border: 1px solid blue; */
     justify-content: space-around;
 }
 
@@ -23,7 +23,6 @@ header>img {
     display: flex;
     flex-direction: column;
     gap: 24px;
-    /* border: 1px solid red; */
     width: 430px;
 }
 
@@ -31,12 +30,10 @@ header>img {
     color: var(--color-brand-100);
 }
 
-
 .posts {
     width: 100%;
     display: flex;
     flex-wrap: wrap;
-    /* align-items: center; */
     gap: 30px;
     justify-content: space-between;
 }
@@ -69,7 +66,6 @@ header>img {
     color: var(--color-brand-100);
 }
 
-.observer{
-    /* background-color: red; */
+.observer {
     height: 5px;
 }

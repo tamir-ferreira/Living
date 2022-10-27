@@ -1,46 +1,72 @@
 import { getPostId } from "../../scripts/requests.js"
 
 
+/* ---------------- MAPEAR BOTÕES DE CATEGORIAS ------------------- */
 const mapBtnsCategory = () => {
     const btnsNavigation = document.querySelectorAll('[data-btns]')
-    // localStorage.setItem('@living-category', 'Todos')
+    const btnHome = document.querySelector('#btn-home')
+
+    btnHome.onclick = () => {
+        localStorage.setItem('@living-category', 'Todos')
+    }
 
     btnsNavigation.forEach(btn => {
         btn.onclick = async () => {
             const category = btn.getAttribute('data-btns')
-            console.log(category)
-
             localStorage.setItem('@living-category', category)
-
             window.location.replace('../home/index.html')
         }
     });
 }
 
 
+/* ---------------- RENDERIZAR BOTÕES DE CATEGORIAS ------------------- */
 const renderBtnsCategory = () => {
     const categories = JSON.parse(localStorage.getItem('@living-categories'))
     const navigation = document.querySelector('.navigation')
-    // console.log(categories)
+
     categories.forEach(category => {
+        const li = document.createElement('li')
+        const button = document.createElement('button')
 
-            const li = document.createElement('li')
-            const button = document.createElement('button')
+        button.className = 'btn-grey'
+        button.textContent = category
+        button.dataset.btns = category
 
-            button.className = 'btn-grey'
-            button.textContent = category
-            button.dataset.btns = category
-
-            li.appendChild(button)
-            navigation.appendChild(li)
+        li.appendChild(button)
+        navigation.appendChild(li)
 
     })
-    // console.log(categories)
+
+    insertTestBtns(navigation)
+
+    const btnScrollR = document.querySelector(`#btn-scroll-right`)
+    const btnScrollL = document.querySelector(`#btn-scroll-left`)
+    btnScrollR.onclick = () => navigation.scrollLeft += 100
+    btnScrollL.onclick = () => navigation.scrollLeft -= 100
+
     mapBtnsCategory()
 }
 
 
+/* ---------------- INSERIR BOTÕES EXTRAS PARA DEMONSTRAR O SCROLL NAS CATEGORIAS ------------------ */
+const insertTestBtns = (navigation) => {
+    for (let i = 1; i <= 4; i++) {
+        const li = document.createElement('li')
+        const button = document.createElement('button')
+
+        button.classList.add('btn-grey', 'btn-empty')
+        button.textContent = ``
+
+        li.appendChild(button)
+        navigation.appendChild(li)
+    }
+}
+
+
+/* ---------------- RENDERIZAR POST SELECIONADO ------------------ */
 const renderPost = async () => {
+    const postID = localStorage.getItem('@living-postID')
     const postHeader = document.querySelector('.post-header')
     const postContent = document.querySelector('.post-content')
 
@@ -50,8 +76,6 @@ const renderPost = async () => {
     const imgContent = document.createElement('img')
     const pContent = document.createElement('p')
 
-    const postID = localStorage.getItem('@living-postID')
-    // const postID = '387de537-655e-4dd8-b9a0-6b50bd4d0178'
     const post = await getPostId(postID)
     const { title, description, image, content } = post
 
@@ -70,4 +94,3 @@ const renderPost = async () => {
     renderBtnsCategory()
 }
 renderPost()
-

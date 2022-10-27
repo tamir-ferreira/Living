@@ -19,14 +19,10 @@
   --color-brand-100: #087f5b;
   --color-brand-200: #099268;
 
-  /* 40px */
-  --font-size-1: 2.5rem;
-  /* 28px */
-  --font-size-2: 1.75rem;
-  /* 20px */
-  --font-size-3: 1.25rem;
-  /* 16px */
-  --font-size-4: 1rem;
+  --font-size-1: 2.5rem;   /* 40px */
+  --font-size-2: 1.75rem;  /* 28px */
+  --font-size-3: 1.25rem;  /* 20px */
+  --font-size-4: 1rem;     /* 16px */
 
   --weight-1: 700;
   --weight-2: 600;
@@ -34,19 +30,15 @@
 
   --radius-1: 32px;
   --radius-2: 50%;
+}
 
+body {
+  color: var(--color-grey-100);
 }
 
 a {
   color: var(--color-grey-100);
   text-decoration: none;
-}
-
-body {
-  /* align-items: center;
-  height: 100vh;
-  background-color: var(--color-grey-4); */
-  color: var(--color-grey-100);
 }
 
 ul {
@@ -85,15 +77,12 @@ ul {
 
 nav {
   position: relative;
-  /* border: 1px solid red; */
 }
 
 .navigation {
   display: flex;
-  /* flex-wrap: wrap; */
   width: 100%;
   gap: 20px;
-  /* border: 1px solid red; */
   margin-bottom: 80px;
   position: relative;
   overflow-x: hidden;
@@ -106,7 +95,6 @@ footer {
   color: var(--color-grey-300);
   display: flex;
   align-items: center;
-  /* border: 1px solid red; */
   font-weight: 300;
 }
 
@@ -114,7 +102,6 @@ footer {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  /* border: 1px solid red; */
   width: 100%;
 }
 
@@ -122,31 +109,29 @@ footer {
   display: flex;
   width: 733px;
   align-items: center;
-  /* justify-content: space-between; */
   gap: 54px;
 }
 
 .container {
   max-width: 1140px;
   margin: 0 auto;
-
 }
 
 .bg-icon-right,
-.bg-icon-left{
+.bg-icon-left {
+  background-color: var(--color-grey-800);
   color: var(--color-grey-800);
   border-radius: var(--radius-2);
   position: absolute;
   right: 0;
   top: 0;
   opacity: 0.8;
-  background-color: var(--color-grey-800);
   width: 38px;
   height: 38px;
 }
 
-.bg-icon-left{
-  left:0;
+.bg-icon-left {
+  left: 0;
 }
 
 .icon-right,
@@ -166,18 +151,12 @@ footer {
 
 }
 
-.icon-left{
-  left:0;
+.icon-left {
+  left: 0;
   transform: rotate(180deg);
 }
 
-.icon-right:hover{
-  /* background-color: var(--color-grey-500); */
-  /* border: 1px solid var(--color-grey-500); */
-  /* color: var(--color-grey-100); */
-  background: url("../imgs/icon-hover.svg") no-repeat center;
-}
-.icon-left:hover{
-
+.icon-right:hover,
+.icon-left:hover {
   background: url("../imgs/icon-hover.svg") no-repeat center;
 }

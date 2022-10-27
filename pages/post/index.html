@@ -9,14 +9,14 @@
     <link rel="stylesheet" href="../../styles/globalStyles.css">
     <link rel="stylesheet" href="../../styles/button.css">
     <script defer type="module" src='index.js'></script>
-    <title>Living</title>
+    <title>Living - POSTS</title>
 </head>
 
 <body>
     <header class="container" id="topo">
         <img src="../../imgs/logo.png" alt="logomarca">
         <a href="../home/index.html">
-            <button class="btn-grey">Home</button>
+            <button id="btn-home" class="btn-grey">Home</button>
         </a>
     </header>
     <main>
@@ -33,9 +33,11 @@
                 </li>
                 <!-- RENDERIZADO PELO JS -->
             </ul>
-            
-            <div class="bg-icon">
-                <button class="icon"></button>
+            <div class="bg-icon-right">
+                <button id="btn-scroll-right" class="icon-right"></button>
+            </div>
+            <div class="bg-icon-left">
+                <button id="btn-scroll-left" class="icon-left"></button>
             </div>
         </nav>
     </main>

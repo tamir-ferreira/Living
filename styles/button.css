@@ -44,6 +44,8 @@ button:hover{
     border: 1px solid var(--color-brand-200);
 }
 
-
+.btn-empty{
+    width: 100px;
+}
 
 

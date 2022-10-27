@@ -6,25 +6,22 @@ const categories = []
 let page = 0
 
 
-// const activeObserver = () =>{
+/* ---------------- OBSERVADOR FINAL DA LISTA DE CARDS ------------------ */
 const observer = new IntersectionObserver(async (entries) => {
     if (entries.some((entry) => entry.isIntersecting)) {
-        // getNews(page++);
         const category = localStorage.getItem('@living-category')
         if (page < 3 && category == 'Todos') renderPosts(await getNews(page++), false);
     }
 });
-// }
-// activeObserver()
 
 
+/* ---------------- MAPEAR BOTÕES DE LEITURA DOS POSTS ------------------ */
 const mapBtnsRead = () => {
     const divObserver = document.querySelector('.observer')
     const btnsRead = document.querySelectorAll('[data-id]')
     btnsRead.forEach(btn => {
         btn.onclick = () => {
             const id = btn.getAttribute('data-id')
-            // console.log()
             localStorage.setItem('@living-postID', id)
             window.location.replace("../post/index.html");
         }
@@ -33,26 +30,25 @@ const mapBtnsRead = () => {
     observer.observe(divObserver);
 }
 
+
+/* ---------------- RECARREGAR RENDERIZAÇÃO DOS POSTS ------------------ */
 const reloadRender = (posts) => {
     const btnsNavigation = document.querySelectorAll('[data-btns]')
 
     if (storagedCategory == null) {
         localStorage.setItem('@living-category', 'Todos')
+
     } else {
         btnsNavigation.forEach(btn => {
             const category = btn.getAttribute('data-btns')
-            // console.log(category)
-
             btn.classList.remove('btn-primary')
             btn.classList.add('btn-grey')
 
             if (category == storagedCategory) {
-                console.log('encontrada', category)
+                const filteredPosts = posts.filter(post => post.category == category)
                 btn.classList.remove('btn-grey')
                 btn.classList.add('btn-primary')
 
-                const filteredPosts = posts.filter(post => post.category == category)
-                // console.log(filteredPosts)
                 renderPosts(filteredPosts, true)
             }
         })
@@ -60,24 +56,21 @@ const reloadRender = (posts) => {
 }
 
 
-
+/* ---------------- MAPEAR BOTÕES DAS CATEGORIAS ------------------ */
 const mapBtnsCategory = (posts) => {
     const btnsNavigation = document.querySelectorAll('[data-btns]')
-    // localStorage.setItem('@living-category', 'Todos')
-
-    // console.log(localStorage.getItem('@living-category'))
 
     btnsNavigation.forEach(btn => {
         btn.onclick = async () => {
             const category = btn.getAttribute('data-btns')
-            // console.log(category)
             btnsNavigation.forEach(clear => {
                 clear.classList.remove('btn-primary')
                 clear.classList.add('btn-grey')
             })
+
+            localStorage.setItem('@living-category', category)
             btn.classList.remove('btn-grey')
             btn.classList.add('btn-primary')
-            localStorage.setItem('@living-category', category)
 
             if (category == 'Todos') {
                 page = 0
@@ -85,25 +78,20 @@ const mapBtnsCategory = (posts) => {
 
             } else {
                 const filteredPosts = posts.filter(post => post.category == category)
-                console.log(filteredPosts)
                 renderPosts(filteredPosts, true)
             }
         }
-    });
+    })
     reloadRender(posts)
 }
 
 
-
-
+/* ---------------- RENDERIZAR BOTÕES DAS CATEGORIAS ------------------ */
 const renderBtnsCategory = (posts) => {
     const navigation = document.querySelector('.navigation')
 
     posts.forEach(post => {
         const { category } = post
-        /* const find = btnsNavigation.findIndex(btn => btn.getAttribute('data-btns').trim() == category.trim())
-        console.log(category, find) */
-
         const findCategory = categories.findIndex(elem => elem == category)
 
         if (findCategory === -1) {
@@ -119,12 +107,23 @@ const renderBtnsCategory = (posts) => {
 
             categories.push(category)
         }
-        // console.log(categories)
+
         localStorage.setItem('@living-categories', JSON.stringify(categories))
     })
+
+    insertTestBtns(navigation)
+
+    const btnScrollR = document.querySelector(`#btn-scroll-right`)
+    const btnScrollL = document.querySelector(`#btn-scroll-left`)
+
+    btnScrollR.onclick = () => navigation.scrollLeft += 100
+    btnScrollL.onclick = () => navigation.scrollLeft -= 100
+
     mapBtnsCategory(posts)
 }
 
+
+/* ---------------- RENDERIZAR POSTS NA LISTA PRINCIPAL ------------------ */
 const renderPosts = (posts, clearList = true) => {
     const listPosts = document.querySelector('.posts')
     if (clearList) listPosts.innerHTML = ''
@@ -139,7 +138,6 @@ const renderPosts = (posts, clearList = true) => {
         const p = document.createElement('p')
         const span = document.createElement('span')
 
-        // li.id = `${id}`
         article.className = 'card'
         img.src = `${image}`
         div.className = 'card-content'
@@ -157,11 +155,11 @@ const renderPosts = (posts, clearList = true) => {
         div.append(h3, p, span)
     });
 
-    // renderBtnsCategory(posts)
     mapBtnsRead()
 }
-console.log('reload')
 
+
+/* ---------------- VERIFICAR CATEGORIA SELECIONADA  ------------------ */
 const initialPosts = async () => {
     if (storagedCategory == null) {
         localStorage.setItem('@living-category', 'Todos')
@@ -172,21 +170,35 @@ const initialPosts = async () => {
 }
 
 
+/* ---------------- VERIFICAR CATEGORIAS EXISTENTES NA API ------------------ */
 const eventgetAll = async () => {
     const posts = []
     let currentPage = 0
 
     while (currentPage < 3) {
         const list = await getNews(currentPage)
-        // console.log(list)
         list.forEach(post => {
             posts.push(post)
         })
         currentPage++
     }
-    // console.log(posts)
 
     renderBtnsCategory(posts)
     initialPosts(posts)
 }
 eventgetAll()
+
+
+/* ---------------- INSERIR BOTÕES EXTRAS PARA DEMONSTRAR O SCROLL NAS CATEGORIAS ------------------ */
+const insertTestBtns = (navigation) => {
+    for (let i = 1; i <= 4; i++) {
+        const li = document.createElement('li')
+        const button = document.createElement('button')
+
+        button.classList.add('btn-grey', 'btn-empty')
+        button.textContent = ``
+
+        li.appendChild(button)
+        navigation.appendChild(li)
+    }
+}
