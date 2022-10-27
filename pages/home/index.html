@@ -1,12 +1,67 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Living</title>
+    <link rel="stylesheet" href="../../styles/globalStyles.css">
+    <link rel="stylesheet" href="../../styles/button.css">
+    <link rel="stylesheet" href="index.css">
+    <script defer type="module" src='index.js'></script>
+    <title>Living - HOME</title>
 </head>
+
 <body>
-    <main></main>
+    <header class="container" id="topo">
+        <div class="header-container">
+            <img src="../../imgs/logo.png" alt="logomarca">
+            <div class="header-content">
+                <h2 class="font1">Cuidando de cada <span>detalhe</span> da sua casa</h2>
+                <p class="font4-rg">Trazendo uma nova e incrível experiência para você e para seu lar</p>
+                <a href="#content">
+                    <span class="font4-sb">Consumir conteúdos</span>
+                </a>
+            </div>
+        </div>
+        <img src="../../imgs/img-header.png" alt="mulher utilizando um laptop">
+    </header>
+    <main id="content" class="container">
+        <nav class="container">
+            <ul class="navigation">
+                <li>
+                    <button data-btns="Todos" class="btn-grey btn-primary">Todos</button>
+                </li>
+                <!-- RENDERIZADO PELO JS -->
+            </ul>
+            <div class="bg-icon-right">
+                <button id="btn-scroll-right" class="icon-right"></button>
+            </div>
+            <div class="bg-icon-left">
+                <button id="btn-scroll-left" class="icon-left"></button>
+            </div>
+        </nav>
+        <section>
+            <ul class="posts">
+                <!-- RENDERIZADO PELO JS -->
+            </ul>
+            <div class="observer"></div>
+        </section>
+    </main>
+    <footer>
+        <div class="container footer-container">
+            <div class="footer-content">
+                <img src="../../imgs/logo-inv.png" alt="logomarca">
+                <p class="font4-rg">The passage experienced a surge in popularity during the 1960s when Letraset used it
+                    on their
+                    dry-transfer sheets, and again during the 90s as desktop publishers bundled the text with their
+                    software.</p>
+            </div>
+            <a href="#topo">
+                <button class="btn-grey-dark">Voltar para o topo</button>
+            </a>
+        </div>
+    </footer>
 </body>
+
 </html>

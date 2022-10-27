@@ -1,1 +1,71 @@
-/* Desenvolva seu estilo aqui */
+/* ---------------- CSS HOME ------------------- */
+header {
+    display: flex;
+    justify-content: space-between;
+    padding: 75px 0 102px 0;
+}
+
+header>img {
+    width: 551px;
+}
+
+.header-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+.header-container>img {
+    width: 128px;
+}
+
+.header-content {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    width: 430px;
+}
+
+.header-content h2 span {
+    color: var(--color-brand-100);
+}
+
+.posts {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+    justify-content: space-between;
+}
+
+.card {
+    display: flex;
+    flex-direction: column;
+    width: 548px;
+    gap: 24px;
+    margin-bottom: 63px;
+}
+
+.card img {
+    height: 172px;
+    object-fit: cover;
+}
+
+.card-content {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.card-content p {
+    color: var(--color-grey-200);
+}
+
+.card-content span {
+    cursor: pointer;
+    color: var(--color-brand-100);
+}
+
+.observer {
+    height: 5px;
+}
