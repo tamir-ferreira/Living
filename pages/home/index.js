@@ -159,13 +159,11 @@ const renderPosts = (posts, clearList = true) => {
 }
 
 
-/* ---------------- VERIFICAR CATEGORIA SELECIONADA  ------------------ */
+/* ---------------- VERIFICAR SE JÁ EXISTE CATEGORAIA SELECIONADA  ------------------ */
 const initialPosts = async () => {
     if (storagedCategory == null) {
         localStorage.setItem('@living-category', 'Todos')
-        if (storagedCategory == "Todos") {
             renderPosts(await getNews(page++));
-        }
     }
 }
 
