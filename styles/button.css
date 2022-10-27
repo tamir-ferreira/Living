@@ -48,4 +48,10 @@ button:hover{
     width: 100px;
 }
 
+.btn-empty:hover{
+    background: var(--color-grey-700);
+    border: 1px solid var(--color-grey-700);
+    cursor: default;
+}
+
 
